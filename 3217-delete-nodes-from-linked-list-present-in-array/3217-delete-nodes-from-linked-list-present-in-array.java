@@ -10,26 +10,23 @@
  */
 class Solution {
     public ListNode modifiedList(int[] nums, ListNode head) {
-        List<Integer> l1 = new LinkedList<Integer>();
-        List<Integer> l2 = new LinkedList<Integer>();
+        Set<Integer> hs = new HashSet<Integer>();
         for(int x : nums)
         {
-            l1.add(x);
+            hs.add(x);
         }
+        ListNode dummy = new ListNode();
+        ListNode cur = dummy;
         ListNode temp = head;
         while(temp != null)
         {
-            l2.add(temp.val);
+            if(!hs.contains(temp.val))
+            {
+                cur.next = new ListNode(temp.val);
+                cur = cur.next;
+            }
             temp = temp.next;
         }
-        l2.removeAll(l1);
-        ListNode ans = new ListNode();
-        temp = ans;
-        for(int i = 0; i < l2.size(); i++)
-        {
-            temp.next = new ListNode(l2.get(i));
-            temp = temp.next;
-        }
-        return ans.next;
+        return dummy.next;
     }
 }
