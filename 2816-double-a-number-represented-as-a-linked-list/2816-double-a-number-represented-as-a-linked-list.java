@@ -8,32 +8,32 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+ import java.math.BigInteger;
 class Solution {
     public ListNode doubleIt(ListNode head) {
         if(head == null) return head;
-        if(head.next == null && head.val < 5)
+        
+        StringBuilder sb = new StringBuilder();
+        ListNode temp = head;
+        while (temp != null)
         {
-            head.val = 2*head.val;
-            return head;
-        }
-        ListNode temp = head, cur = null, prev = null;
-        int val = 0, lastDigit = 0;
-        while(temp != null)
-        {
-            val = val * 10 + temp.val;
+            sb.append(temp.val);
             temp = temp.next;
         }
-        val = 2*val;
-        temp = new ListNode();
-        while(val > 0)
+
+        BigInteger number = new BigInteger(sb.toString());
+        BigInteger doubled = number.multiply(BigInteger.valueOf(2));
+        String result = doubled.toString();
+
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+
+        for(char c : result.toCharArray())
         {
-            lastDigit = val % 10;
-            val /= 10;
-            temp.val = lastDigit;
-            temp.next = prev;
-            prev = temp;
-            temp = new ListNode();
+            current.next = new ListNode(c - '0');
+            current = current.next;
         }
-        return prev;
+        
+        return dummy.next;
     }
 }
