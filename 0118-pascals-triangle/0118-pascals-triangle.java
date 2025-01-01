@@ -1,17 +1,16 @@
 class Solution {
-    public static int nCr(int n, int r)
+    public static List<Integer> generateRow(int row)
     {
-        if(n <= 0 || r <= 0) throw new IllegalArgumentException("Only positive values allowed");
-        if(n == 1 && r == 1) return 1;
-        n = n-1;
-        r = r-1;
+        List<Integer> ansRow = new ArrayList<Integer>();
         int res = 1;
-        for(int i = 0; i < r; i++)
+        ansRow.add(res);
+        for(int col = 1; col < row; col++)
         {
-            res = res * (n-i);
-            res = res / (i+1);
+            res = res * (row-col);
+            res = res / (col);
+            ansRow.add(res);
         }
-        return res;
+        return ansRow;
     }
 
     public List<List<Integer>> generate(int numRows) 
@@ -19,12 +18,7 @@ class Solution {
         List<List<Integer>> ans = new ArrayList<List<Integer>>();
         for(int i = 1; i <= numRows; i++)
 		{
-            ArrayList<Integer> temp = new ArrayList<Integer>();
-		    for(int j = 1; j <= i; j++)
-		    {
-		        temp.add(nCr(i,j));
-		    }
-		    ans.add(temp);
+            ans.add(generateRow(i));
 		}
         return ans;
     }
