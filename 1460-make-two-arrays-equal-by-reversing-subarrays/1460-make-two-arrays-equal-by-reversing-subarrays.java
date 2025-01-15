@@ -1,23 +1,22 @@
 class Solution {
     public boolean canBeEqual(int[] target, int[] arr) {
-        Map<Integer,Integer> targetMap = new HashMap<>();
-        Map<Integer,Integer> arrMap = new HashMap<>();
+        int max = Integer.MIN_VALUE;
+        for(int x : target)
+            max = Math.max(max,x);
+        for(int x : arr)
+            max = Math.max(max,x);  
+
+        int[] hashArr = new int[max+1];
 
         for(int x : target)
-            targetMap.put(x,targetMap.getOrDefault(x,0)+1);
+            hashArr[x]++;
+        
+        for(int x : arr)
+            hashArr[x]--;
 
-        for(int y : arr)
-            arrMap.put(y,arrMap.getOrDefault(y,0)+1);
-
-        for(Map.Entry<Integer,Integer> targetEntry : targetMap.entrySet())
-        {
-            int key = targetEntry.getKey(), value = targetEntry.getValue();
-            if(!arrMap.containsKey(key))
+        for(int x : hashArr)
+            if(x != 0)
                 return false;
-            else if(arrMap.get(key) != value)
-                return false;
-        }
-
         return true;
     }
 }
