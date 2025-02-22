@@ -1,7 +1,7 @@
 class Solution {
     public void moveZeroes(int[] nums) {
-        int j = -1, i = 0;
-        for(i = 0; i < nums.length; i++)
+        int j = -1;
+        for(int i = 0; i < nums.length; i++)
         {
             if(nums[i] == 0)
             {
@@ -9,10 +9,8 @@ class Solution {
                 break;
             }
         }
-
         if(j == -1) return;
-        
-        for(i = j+1; i < nums.length; i++)
+        for(int i = j+1; i < nums.length; i++)
         {
             if(nums[i] != 0)
             {
