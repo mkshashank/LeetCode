@@ -1,45 +1,37 @@
 class Solution {
-    public List<Integer> spiralOrder(int[][] matrix)
+    public List<Integer> spiralOrder(int[][] matrix) 
     {
-        int minRow = 0;
-        int minCol = 0;
-        int maxRow = matrix.length - 1;
-        int maxCol = matrix[0].length - 1;
-        int totalElements = matrix.length * matrix[0].length;
-        int count = 0;
-        List<Integer> al = new ArrayList<Integer>();
-        
-        while(count < totalElements)
+        List<Integer> ans = new ArrayList<>();
+        int top = 0, left = 0, m = matrix.length, n = matrix[0].length;
+        int bottom = m-1, right = n-1;
+        while(top <= bottom && left <= right)
         {
-            //Top wall
-            for(int i = minRow, j = minCol; j <= maxCol && count < totalElements; j++)
+            //traverse left to right
+            for(int i = left; i <= right; i++)
+                ans.add(matrix[top][i]);
+            top++;
+
+            //traverse top to bottom
+            for(int i = top; i <= bottom; i++)
+                ans.add(matrix[i][right]);
+            right--;
+            
+            //traverse right to left
+            if(top <= bottom)
             {
-                al.add(matrix[i][j]);
-                count++;
+                for(int i = right; i >= left; i--)
+                    ans.add(matrix[bottom][i]);
+                bottom--;
             }
-            minRow++;
-            //Right wall
-            for(int i = minRow, j = maxCol; i <= maxRow && count < totalElements; i++)
+
+            //traverse bottom to top
+            if(left <= right)
             {
-                al.add(matrix[i][j]);
-                count++;
+                for(int i = bottom; i >= top; i--)
+                    ans.add(matrix[i][left]);
+                left++;
             }
-            maxCol--;
-            //Bottom wall
-            for(int i = maxRow, j = maxCol; j >= minCol && count < totalElements; j--)
-            {
-                al.add(matrix[i][j]);
-                count++;
-            }
-            maxRow--;
-            //Left wall
-            for(int i = maxRow, j = minCol; i >= minRow && count < totalElements; i--)
-            {
-                al.add(matrix[i][j]);
-                count++;
-            }
-            minCol++;
         }
-        return al;
+        return ans;
     }
 }
