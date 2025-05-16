@@ -14,7 +14,7 @@ class Solution
     {
         int total = 0;
         for(int x : piles)
-            total += Math.ceil((double)x/(double)mid);
+            total += Math.ceil((double)x/mid);
         return total;
     }
 
