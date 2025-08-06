@@ -1,11 +1,13 @@
-class Solution {
-    public int missingNumber(int[] nums) {
-        int XOR1 = 0, XOR2 = 0;
+class Solution 
+{
+    public int missingNumber(int[] nums) 
+    {
+        int n = nums.length, total = 0, currentSum = 0;
         for(int i = 0; i < nums.length; i++)
         {
-            XOR1 ^= nums[i];
-            XOR2 ^= i + 1;
+            total ^= i+1;
+            currentSum ^= nums[i];
         }
-        return XOR1 ^ XOR2;
+        return total ^ currentSum;
     }
 }
