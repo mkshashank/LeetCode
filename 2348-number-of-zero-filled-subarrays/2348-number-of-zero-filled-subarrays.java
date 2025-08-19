@@ -2,21 +2,22 @@ class Solution
 {
     public long zeroFilledSubarray(int[] nums) 
     {
-        long count = 0, left = -1;
-        int right = 0;
-        while(right < nums.length)
+        long streak = 0, count = 0;
+        for(int x : nums)
         {
-            if(nums[right] == 0)
+            if(x == 0)
+                streak++;
+            else
             {
-                if(left == -1)
-                {
-                    left = right;
-                }
-                count = count + right - left + 1;
+                count += (streak * (streak+1) / 2);
+                streak = 0;
             }
-            else left = -1;
-            right++;
         }
+        if(streak > 0)
+        {
+                count += (streak * (streak+1) / 2);
+                streak = 0;
+        } 
         return count;
     }
 }
