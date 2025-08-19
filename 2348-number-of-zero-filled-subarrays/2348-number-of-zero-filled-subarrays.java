@@ -2,16 +2,20 @@ class Solution
 {
     public long zeroFilledSubarray(int[] nums) 
     {
-        long count = 0, streak = 0;
-        for(int x : nums)
+        long count = 0, left = -1;
+        int right = 0;
+        while(right < nums.length)
         {
-            if(x == 0)
+            if(nums[right] == 0)
             {
-                streak++;
-                count += streak;
+                if(left == -1)
+                {
+                    left = right;
+                }
+                count = count + right - left + 1;
             }
-            else
-                streak = 0;
+            else left = -1;
+            right++;
         }
         return count;
     }
