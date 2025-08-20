@@ -39,9 +39,10 @@ class Solution
             arr[i] = list.get(i);
 
         k = k % arr.length;
-        reverse(arr,0,k);
-        reverse(arr,arr.length-k,arr.length-1);
+        
         reverse(arr,0,arr.length-1);
+        reverse(arr,0,k-1);
+        reverse(arr,k,arr.length-1);
         k = 0;
         temp = head;
         while(temp != null)
