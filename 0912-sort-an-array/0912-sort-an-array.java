@@ -1,52 +1,46 @@
 class Solution {
-    public void swap(int[] arr, int i, int j)
+    public void merge(int[] arr, int low, int mid, int high)
     {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-
-    public int partition(int[] arr, int low, int high)
-    {
-        int pivot = arr[low];
         int i = low;
-        int j = high;
-        while(i < j)
+        int j = mid+1;
+        int k = 0;
+        int[] temp = new int[high-low+1];
+        while(i <= mid && j <= high)
         {
-            while(arr[i] <= pivot && i <= high-1)
-            {
-                i++;
-            }
-            while(arr[j] > pivot && j >= low+1)
-            {
-                j--;
-            }
-            if(i < j)
-                swap(arr,i,j);
+            if(arr[i] <= arr[j])
+                temp[k++] = arr[i++];
+            else
+                temp[k++] = arr[j++];
         }
-        swap(arr,low,j);
-        return j;
+        while(i <= mid)
+            temp[k++] = arr[i++];
+        while(j <= high)
+            temp[k++] = arr[j++];
+        for(int x = 0; x < temp.length; x++)
+        {
+            arr[low+x] = temp[x];
+        }
     }
 
-    public void qS(int[] arr, int low, int high)
+    public void mergeSort(int[] arr, int low, int high)
     {
         if(low < high)
         {
-            int partIndex = partition(arr,low,high);
-            qS(arr,low,partIndex-1);
-            qS(arr,partIndex+1,high);
+            int mid = (low+high)/2;
+            mergeSort(arr,low,mid);
+            mergeSort(arr,mid+1,high);
+            merge(arr,low,mid,high);
         }
     }
 
-    public void quickSort(int[] arr)
+    public void mS(int[] nums)
     {
         int low = 0;
-        int high = arr.length - 1;
-        qS(arr,low,high);
+        int high = nums.length-1;
+        mergeSort(nums,low,high);
     }
-
     public int[] sortArray(int[] nums) {
-        quickSort(nums);
+        mS(nums);
         return nums;
     }
 }
