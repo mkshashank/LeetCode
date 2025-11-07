@@ -25,21 +25,16 @@ class Solution
 
     public int pairSum(ListNode head) 
     {
-        ListNode temp = head;
-        int count = 0;
-        while(temp != null)
+        ListNode slow = head, fast = head, prev = head;
+        while(fast != null && fast.next != null)
         {
-            count++;
-            temp = temp.next;
+            fast = fast.next.next;
+            prev = slow;
+            slow = slow.next;
         }
-        temp = head;
-        ListNode prev = temp;
-        for(int i = 0; i < count/2; i++)
-        {
-            prev = temp;
-            temp = temp.next;
-        }
+
         prev.next = null;
+        ListNode temp = slow;
         ListNode firstHead = head;
         ListNode secondHead = reverse(temp);
         int maxi = Integer.MIN_VALUE;
