@@ -3,37 +3,19 @@ class Solution
     public int[] twoSum(int[] nums, int target) 
     {
         int[] res = new int[2];
-
-        Map<Integer,Integer> map = new HashMap<>();
-
-        for(int i = 0; i < nums.length; i++)
-            map.put(i,nums[i]);
-
-        Arrays.sort(nums);
-        int i = 0, j = nums.length-1;
-        while(i < j)
+        int n = nums.length;
+        for(int i = 0; i < n; i++)
         {
-            if(nums[i] + nums[j] > target)
-                j--;
-            else if(nums[i] + nums[j] < target)
-                i++;
-            else
+            for(int j = i+1; j < n; j++)
             {
-                int num1 = nums[i];
-                int num2 = nums[j];
-                for(Map.Entry<Integer,Integer> entry : map.entrySet())
+                if(nums[i] + nums[j] == target)
                 {
-                    if(entry.getValue() == num1)
-                        res[0] = entry.getKey();
+                    res[0] = i;
+                    res[1] = j;
+                    return res;
                 }
-                for(Map.Entry<Integer,Integer> entry : map.entrySet())
-                {
-                    if(entry.getValue() == num2 && entry.getKey() != res[0])
-                        res[1] = entry.getKey();
-                }
-                return res;
             }
-        }
+        }    
         return res;
     }
 }
