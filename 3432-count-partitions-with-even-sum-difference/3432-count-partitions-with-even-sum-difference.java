@@ -10,7 +10,7 @@ class Solution
         {
             leftSum += nums[i];
             int rightSum = total - leftSum;
-            if((leftSum - rightSum) % 2 == 0)
+            if(((leftSum - rightSum) & 1 )== 0)
                 count++;
         }
         return count;
