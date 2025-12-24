@@ -11,8 +11,9 @@ class Solution
 
         while(i >= 0 && sum > 0)
         {
-            sum -= capacity[i--];
+            sum -= capacity[i];
             count++;
+            i--;
         }
 
         return count;
