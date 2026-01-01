@@ -1,14 +1,15 @@
-class Solution {
+class Solution 
+{
     public int reverse(int x) 
     {
-        long rev = 0;
+        long ans = 0;
         while(x != 0)
         {
             int lastDigit = x % 10;
-            rev = rev * 10 + lastDigit;
             x /= 10;
+            ans = ans * 10 + lastDigit;
         }    
-        if(rev < Integer.MIN_VALUE || rev > Integer.MAX_VALUE) return 0;
-        return (int)rev;
+
+        return ans > Integer.MAX_VALUE || ans < Integer.MIN_VALUE ? 0 : (int)ans;
     }
 }
