@@ -2,21 +2,22 @@ class Solution
 {
     public int longestConsecutive(int[] nums) 
     {
+        if(nums.length == 0) return 0;
         Arrays.sort(nums);
-        int maxi = 0, lastSmaller = Integer.MIN_VALUE, count = 1;
-        for(int i = 0; i < nums.length; i++)
+        int prev = Integer.MIN_VALUE, maxi = 1, count = 0;
+        for(int x : nums)
         {
-            if(nums[i]-1 == lastSmaller)
+            if(x == prev+1)
             {
-                lastSmaller = nums[i];
+                prev = x;
                 count++;
+                maxi = Math.max(maxi,count);
             }
-            else if(nums[i] != lastSmaller)
+            else if(prev != x)
             {
-                lastSmaller = nums[i];
+                prev = x;
                 count = 1;
             }
-            maxi = Math.max(maxi,count);
         }
         return maxi;
     }
